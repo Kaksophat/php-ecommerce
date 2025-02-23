@@ -20,10 +20,10 @@
         $_SESSION['id'] = $row['id'];
         $_SESSION['email'] = $row['email'];
         $_SESSION['password'] = $row['password'];
-        header('location:../dashbord.php');
+        header('location:../index.php');
     }
     else{
-        header('location:../index.php');
+        // header('location:../index.php');
     }
   }
 

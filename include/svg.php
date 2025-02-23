@@ -1,41 +1,4 @@
-<?php
- include("./admin/include/oop.php");
- $db = new Ecommerce();
-
-include('./code-login.php');
-
-$page = "home.php";
-$p = "home";
-$slider = true;
-
-if(isset($_GET['p']))
-       $p = $_GET['p'];
-      switch($p){
-        case "phone" : $page = "phone.php";
-                 $slider= false;
-         break;
-         case "watch" : $page = "watch.php";
-                $slider = false;
-         break;
-         case  "register" : $page = "register.php";
-                 $slider = false;
-         break;
-         case "login" : $page = "login.php";
-                  $slider = false;
-          break;
-      }
-
-
-
-
-?>
-
-
-<!DOCTYPE html >
-<html lang="en">
- <?php include("./include/head.php") ?>
-  <body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" tabindex="0">
-   <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
       <symbol id="search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
         <title>Search</title>
         <path fill="currentColor" d="M19 3C13.488 3 9 7.488 9 13c0 2.395.84 4.59 2.25 6.313L3.281 27.28l1.439 1.44l7.968-7.969A9.922 9.922 0 0 0 19 23c5.512 0 10-4.488 10-10S24.512 3 19 3zm0 2c4.43 0 8 3.57 8 8s-3.57 8-8 8s-8-3.57-8-8s3.57-8 8-8z" />
@@ -104,11 +67,3 @@ if(isset($_GET['p']))
         <path d="M14 10.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 .5-.5zm0-3a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0 0 1h7a.5.5 0 0 0 .5-.5zm0-3a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0 0 1h11a.5.5 0 0 0 .5-.5z" />
       </symbol>
     </svg>  
-   <?php include("./include/header.php") ?>
-  
-   <?php if($slider) include("./include/slider.php") ?>
-  
-   <?php  include($page) ?>
-   <?php  include("./include/footer.php") ?>
-  </body>
-</html>

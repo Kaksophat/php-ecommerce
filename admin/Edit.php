@@ -1,35 +1,3 @@
-<?php
- $categoryresult = $db->getdata("category");
-
-if (isset($_POST['submit'])) {
-
-  $productName =  $_POST['productName'];
-  $categoryId =  $_POST['categoryid'];
-  $productPrice = $_POST['productPrice'];
-  $productImage = $_FILES['productImage']['name'];
-  $target_dir = "./upload/";
-  $target_file = $target_dir . basename($productImage);
-
-  move_uploaded_file($_FILES['productImage']['tmp_name'], $target_file);
-  $data=[
-    "category_id" => $categoryId,
-    "product_name" => $productName,
-    "image" => $productImage,
-    "price" => $productPrice
-
-  ];
- 
- 
-  $result = $db->insertdata("product" , $data);
- 
- 
-     
-}
-
-      
-
-
-?>
 <div class="container">
     <div class="page-inner">
         <div class="page-header">

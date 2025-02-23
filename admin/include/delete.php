@@ -1,16 +1,22 @@
 <?php
+include('oop.php');
 
-include('./dbconnection.php');
+$db = new Ecommerce();
+$conn = $db->getConnection();
+if(isset($_GET['id']))
+$id = $_GET['id'];
+$sql = "DELETE FROM product where id = ?";
 
-  if(isset($_GET['id'])){
-    $id = $_GET['id'];
-    $sql = "DELETE FROM product WHERE id = $id";
-    $result = mysqli_query($conn,$sql);
-    if($result){
-    header('location: ../listproduct.php');
-         
-    }
+$stmt = $conn->prepare($sql);
+// $stmt->bindParam("i",$id);
+$stmt->execute([$id]);
+$result= $stmt;
+if($result){
+  header("location: ../index.php?p=listproduct");
+}
 
-  }
+
+
+ 
 
 ?>
