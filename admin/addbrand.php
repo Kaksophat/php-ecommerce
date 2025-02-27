@@ -1,29 +1,25 @@
 <?php
-$buttonLabel = "Add Category";
+$buttonLabel = "Add Brand";
 $action = "add";
 
 
 
 
 if (isset($_POST['submit'])) {
-    $categoryname = $_POST['categoryname'] ?? "";
-    $categoryslug = $_POST['categoryslug'] ?? "";
+    $brandname = $_POST['brandname'] ?? "";
+    $brandslug = $_POST['brandslug'] ?? "";
     $id = $_POST['id'] ?? "";
 
-    if ($categoryname !== "" && $categoryslug !== "") {
+    if ($brandname !== "" && $brandslug !== "") {
         $data = [
-            "name" => $categoryname,
-            "slug" => $categoryslug
+            "name" => $brandname,
+            "slug" => $brandslug
         ];
 
         if ($_POST['action'] == "update" && $id !== "") {
-            $result = $db->updatedata("category", $data, $id);
-            if($result){
-            header("Location: index.php");
-
-            }
+            $result = $db->updatedata("brands", $data, $id);
         } else {
-            $result = $db->insertdata("category", $data);
+            $result = $db->insertdata("brands", $data);
         }
     } else {
         echo "<p style='color: red;'>Category Name and Slug are required!</p>";
@@ -31,7 +27,7 @@ if (isset($_POST['submit'])) {
 }
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $result = $db->getdatabyid("category", "id",$id);
+    $result = $db->getdatabyid("brands", "id",$id);
     
     if ($result) {
         foreach ($result as $row) {
@@ -40,11 +36,10 @@ if (isset($_GET['id'])) {
         }
     }
     
-    $buttonLabel = "Update Category";
+    $buttonLabel = "Update Brand";
     $action = "update";
 }
 ?>
-
 <div class="container">
     <div class="page-inner">
         <div class="page-header">
@@ -60,21 +55,20 @@ if (isset($_GET['id'])) {
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h4 class="card-title flex-grow-1 text-center"><?php echo $buttonLabel?></h4>
-                                    <a href="index.php?p=listcategory" class="btn btn-primary">Back</a>
-                                </div>
+                    <div class="card-header">
+                        <h4 class="card-title text-center"><?php echo $buttonLabel; ?></h4>
+                    </div>
                     <div class="card-body">
                         <form action="" method="POST">
                             <input type="hidden" name="id" value="<?php echo $id; ?>">
                             <div class="form-group">
-                                <label for="productName">Category Name</label>
-                                <input type="text" class="form-control" id="productName" name="categoryname" 
+                                <label for="productName">Brand Name</label>
+                                <input type="text" class="form-control" id="productName" name="brandname" 
                                     value="<?php echo isset($name) ? $name : ""; ?>">
                             </div>
                             <div class="form-group">
-                                <label for="categorySlug">Category Slug</label>
-                                <input type="text" class="form-control" id="categorySlug" name="categoryslug" 
+                                <label for="categorySlug">Brand Slug</label>
+                                <input type="text" class="form-control" id="categorySlug" name="brandslug" 
                                     value="<?php echo isset($slug) ? $slug : "" ?>" >
                             </div>
                             <input type="hidden" name="action" value="<?php echo $action; ?>">

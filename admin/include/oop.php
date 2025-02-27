@@ -11,7 +11,7 @@ class Ecommerce {
             $this->conn = new PDO("mysql:host=".$this->dbHost.";dbname=".$this->dbName, $this->dbUsername, $this->dbPassword); 
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
         } catch (PDOException $e) { 
-            die("Failed to connect with MySQL: " . $e->getMessage()); 
+            die("404 not found " . $e->getMessage()); 
         } 
     }
 
@@ -29,10 +29,7 @@ class Ecommerce {
         
     }
 
-    public function insertdata($table,$data){
-
-      
-       
+    public function insertdata($table,$data){ 
         $columnString = implode(',', array_keys($data)); 
         
         $valueString = ":".implode(',:', array_keys($data)); 
@@ -47,8 +44,12 @@ class Ecommerce {
 
     }
 
-    public function getdatabyid($table ,$field,$id){
+    public function getdatabyid($table ,$field,$id,$clause=""){
         $sql = "SELECT * FROM $table WHERE $field = $id";
+        if(!empty($clause))
+		{
+			$sql .= " " . $clause; 
+		}
         $stmt= $this->conn->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);

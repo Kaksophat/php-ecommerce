@@ -61,8 +61,8 @@
       var swiper = new Swiper(".main-swiper", {
         speed: 500,
         navigation: {
-          nextEl: ".swiper-arrow-prev",
-          prevEl: ".swiper-arrow-next",
+          nextEl: ".swiper-arrow-next",
+          prevEl: ".swiper-arrow-prev",
         },
       });         
 
@@ -107,8 +107,8 @@
       var swiper = new Swiper(".testimonial-swiper", {
         loop: true,
         navigation: {
-          nextEl: ".swiper-arrow-prev",
-          prevEl: ".swiper-arrow-next",
+          nextEl: ".swiper-arrow-next",
+          prevEl: ".swiper-arrow-prev",
         },
       }); 
 

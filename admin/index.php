@@ -15,7 +15,13 @@ if(isset($_GET['p'])){
         break;
         case "listcategory": $page = "listcategory.php";
         break;
-        case "setting": $page = "setting.php";
+        case "addbrand": $page = "addbrand.php";
+        break;
+        case "listbrand": $page = "listbrands.php";
+        break;
+        case "listslideshow": $page = "listslider.php";
+        break;
+        case "addslideshow": $page = "addslider.php";
         break;
     }
 }

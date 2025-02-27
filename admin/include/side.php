@@ -42,31 +42,32 @@
            
             
            
-              <li <?= ($p=="addproduct" ?"class='nav-item  active'":"class='nav-item'") ?>>
-                <a  href="index.php?p=addproduct">
-                  <i class="fas fa-map-marker-alt"></i>
-                  <p>AddProduct</p>
-                </a>
-              
-              </li>
+           
               <li <?= ($p=="listproduct" ?"class='nav-item  active'":"class='nav-item'") ?>>
                 <a href="index.php?p=listproduct">
                   <i class="far fa-chart-bar"></i>
-                  <p>ListProduct</p>
+                  <p>Product</p>
                 </a>
              
               </li>
-              <li <?= ($p=="addcategory" ?"class='nav-item  active'":"class='nav-item'") ?>>
-                <a  href="index.php?p=addcategory">
-                  <i class="fas fa-bars"></i>
-                  <p>Addcategory</p>
-                </a>
-           
-              </li>
+         
               <li <?= ($p=="listcategory" ?"class='nav-item  active'":"class='nav-item'") ?>>
                 <a href="index.php?p=listcategory">
                   <i class="fas fa-desktop"></i>
-                  <p>Listcategory</p>
+                  <p>category</p>
+                </a>
+              </li>
+             
+              <li <?= ($p=="listbrand" ?"class='nav-item  active'":"class='nav-item'") ?>>
+                <a href="index.php?p=listbrand">
+                  <i class="fas fa-desktop"></i>
+                  <p>brands</p>
+                </a>
+              </li>
+              <li <?= ($p=="listslideshow" ?"class='nav-item  active'":"class='nav-item'") ?>>
+                <a href="index.php?p=listslideshow">
+                  <i class="fas fa-desktop"></i>
+                  <p>Slideshow</p>
                 </a>
               </li>
 

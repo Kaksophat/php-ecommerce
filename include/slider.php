@@ -1,53 +1,55 @@
 <section id="billboard" class="position-relative overflow-hidden bg-light-blue">
-      <div class="swiper main-swiper">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <div class="container">
-              <div class="row d-flex align-items-center">
-                <div class="col-md-6">
-                  <div class="banner-content">
-                    <h1 class="display-2 text-uppercase text-dark pb-5">Your Products Are Great.</h1>
-                    <a href="shop.html" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Shop Product</a>
+<div class='swiper main-swiper'>
+<div class='swiper-wrapper'>
+        <?php
+            $result = $db->getdatabyid("slider", "enable",1," ORDER BY ssorder asc");
+            foreach ($result as $row) {
+                $title = $row["title"];
+                $subtitle = $row["subtitle"];
+                $link = $row["link"];
+                $image = $row["image"];
+                echo "
+               
+                 <div class='swiper-slide'>
+                <div class='container'>
+                  <div class='row d-flex flex-wrap align-items-center'>
+                    <div class='col-md-6'>
+                      <div class='banner-content'>
+                        <h1 class='display-2 text-uppercase text-dark pb-5'>$title</h1>
+                        <h3 class='display-2 text-uppercase text-dark pb-5'>$subtitle</h3>
+                        <a href='$link' class='btn btn-medium btn-dark text-uppercase btn-rounded-none'>Shop Product</a>
+                      </div>
+                    </div>
+                    <div class='col-md-5'>
+                      <div class='image-holder'>
+                        <img src='./admin/upload/$image' alt='banner' class='img-fluid w-100 h-100'>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div class="col-md-5">
-                  <div class="image-holder">
-                    <img src="images/banner-image.png" alt="banner">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- <div class="swiper-slide">
-            <div class="container">
-              <div class="row d-flex flex-wrap align-items-center">
-                <div class="col-md-6">
-                  <div class="banner-content">
-                    <h1 class="display-2 text-uppercase text-dark pb-5">Technology Hack You Won't Get</h1>
-                    <a href="shop.html" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Shop Product</a>
-                  </div>
-                </div>
-                <div class="col-md-5">
-                  <div class="image-holder">
-                    <img src="images/banner-image.png" alt="banner">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> -->
+              </div>";
+              
+               
+            }
+       
+        ?>
+         
         </div>
       </div>
-      <div class="swiper-icon swiper-arrow swiper-arrow-prev">
-        <svg class="chevron-left">
-          <use xlink:href="#chevron-left" />
-        </svg>
-      </div>
-      <div class="swiper-icon swiper-arrow swiper-arrow-next">
-        <svg class="chevron-right">
+    
+      <div class="swiper-icon swiper-arrow swiper-arrow-next ms-7">
+        <svg class="chevron-right" style="width: 130px;">
           <use xlink:href="#chevron-right" />
         </svg>
       </div>
+      <div class="swiper-icon swiper-arrow swiper-arrow-prev me-7">
+        <svg class="chevron-left " style="width: 130px;">
+          <use xlink:href="#chevron-left"  />
+        </svg>
+      </div>
     </section>
+    <div class="swiper-pagination position-absolute text-center"></div>
+
     <section id="company-services" class="padding-large">
       <div class="container">
         <div class="row">
