@@ -23,30 +23,32 @@ if(isset($_GET['p'])){
         break;
         case "addslideshow": $page = "addslider.php";
         break;
+        case "listadmin": $page = "admin.php";
+        break;
+        case "addadmin": $page = "addadmin.php";
+        break;
+       
     }
 }
+
 session_start();
 include('./include/oop.php');
 
 $db = new Ecommerce();
-$conn= $db->getConnection() ;
+$auth = new Auth();
 
- if (!isset($_SESSION['id'])) {
-    header('Location: login.php');
-} 
-$user_id = $_SESSION['id'];
-$sql = "SELECT * FROM user WHERE id = :id";  // Use a parameterized query
-$stmt = $conn->prepare($sql);
-$stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
-$stmt->execute();
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-if ($user) {
-    $user_email = $user['email'];
-    $user_name = $user['name'];
-} else {
-    $user_email = 'Email not found';
+if(!$auth->check()){
+    header('location: ./login.php');
 }
+
+$id = $_SESSION['id'];
+$user=$auth->user($id);
+if($user){
+    $user_name = $user['name'];
+    $user_email = $user['email']; 
+}
+
+
 
 
 
@@ -64,7 +66,8 @@ if ($user) {
       <!-- End Sidebar -->
 
       <div class="main-panel">
-        <?php include("./include/header.php") ?>
+        <?php include ("./include/header.php") ?>
+        
         <?php include($page) ?>
 
       </div>

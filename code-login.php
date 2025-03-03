@@ -1,7 +1,6 @@
 <?php
 // filepath: /C:/xampp/htdocs/php-ecommerce/login.php
 session_start();
-include('./admin/include/dbconnection.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['login'])) {

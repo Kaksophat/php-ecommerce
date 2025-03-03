@@ -15,18 +15,17 @@ if (isset($_POST['submit'])) {
     $link = $_POST['link'];
     $enable = $_POST['enable'];
     $ssorder = $_POST['ssorder'];
-    // $Image = $_FILES['image']['name'];
     $id = $_POST['id'] ?? "";
     $Image = $_FILES['image']['name'];
-    $target_file = $target_dir . basename($Image);
-    move_uploaded_file($_FILES['image']['tmp_name'], $target_file);
-
-
-   
-      
-    
+    $target_dir = "./upload/";
+    $existing_image = $_POST['existing_image'] ?? "";
+    if (!empty($Image)) {
+        $target_file = $target_dir . basename($Image);
+        move_uploaded_file($_FILES['image']['tmp_name'], $target_file);
+    } else {
+        $Image = $existing_image;
+    }
  
-  if ($title !== "" && $subtitle !== "" && $link !== "" && $enable !== "" && $ssorder !== "" && $Image !== "") {
     $data = [
         "title" => $title,
         "subtitle" => $subtitle,
@@ -41,31 +40,26 @@ if (isset($_POST['submit'])) {
 
     if ($_POST['action'] == "update" && $id !== "") {
         $result = $db->updatedata("slider", $data, $id);
-    
-       
+     
     } else {
         $result = $db->insertdata("slider", $data);
     }
-} else {
-    echo "<p style='color: red;'>Category Name and Slug are required!</p>";
-}
+  
+} 
  
  
-     
-}
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $result = $db->getdatabyid("slider", "id",$id);
     
     if ($result) {
-        foreach ($result as $row) {
-            $title = $row["title"];
-            $subtitle = $row["subtitle"];
-            $link  = $row['link'];
-            $enable = $row['enable'];
-            $ssorder = $row['ssorder'];
-            $image = $row["image"];
-        }
+            $title = $result["title"];
+            $subtitle = $result["subtitle"];
+            $link  = $result['link'];
+            $enable = $result['enable'];
+            $ssorder = $result['ssorder'];
+            $image = $result["image"];
+        
     }
     
     $buttonLabel = "Update Slideshow";
@@ -82,7 +76,6 @@ if (isset($_GET['id'])) {
     <div class="page-inner">
         <div class="page-header">
             <h3 class="fw-bold mb-3"><?php echo $buttonLabel ?></h3>
-            <?php echo $action ?>
           
             <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
@@ -106,6 +99,7 @@ if (isset($_GET['id'])) {
                     </div>
                     <div class="card-body">
                         <form action="" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="id" value="<?php echo isset($id) ? $id : ""; ?>">
                             <div class="form-group">
                                 <label for="productName">Title</label>
                                 <input type="text" class="form-control" id="productName" value="<?php echo isset($title) ? $title : "" ?>" name="title" >
@@ -119,11 +113,19 @@ if (isset($_GET['id'])) {
                             <div class="form-group">
                                 <label for="productImage">Link</label>
                                 <input type="text" class="form-control"  value="<?php echo isset($link) ? $link : ""?>" name="link" >
-                                <!-- <?php echo " <img src='./upload/$image' class='w-25'>"  ?> -->
                             </div>
                             <div class="form-group">
                                 <label for="productPrice">Enable</label>
-                                <input type="number" class="form-control" value="<?php echo isset($enable) ? $enable :""?>" name="enable" >
+                                <!-- <input type="number" class="form-control" value="<?php echo isset($enable) ? $enable :""?>" name="enable" > -->
+                                 <select name="enable"  class="form-control" id="">
+                                    <option value="">select enable</option>
+                                    <option value="1" <?php if (isset($enable) && $enable == 1) {
+                                        echo "selected";
+                                    } ?>>Enable</option>
+                                    <option value="0" <?php if (isset($enable) && $enable !== 1) {
+                                        echo "selected";
+                                    } ?>>Disable</option>
+                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="productPrice">ssorder</label>
@@ -137,12 +139,13 @@ if (isset($_GET['id'])) {
                                  <img src="./upload/<?php echo $image; ?>" class="w-25">
                                   <input type="hidden" name="existing_image" value="<?php echo $image; ?>">
                                <?php } ?>
+                            
                                </div>
+                               <input type="hidden" name="action" value="<?php echo $action; ?>">
+                               <input type="submit" value="<?php echo $buttonLabel; ?>" name="submit" class="btn btn-primary">
 
 
-                            <input type="hidden" name="action" value="<?php echo $action; ?>">
-
-                            <input type="submit" value="<?php echo $buttonLabel; ?>" name="submit" class="btn btn-primary">
+                              
                         </form>
                     </div>
                 </div>

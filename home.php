@@ -12,7 +12,7 @@
              
               <?php
              
-               $result = $db->getdatabyid("product", "category_id",1);
+               $result = $db->getdatabyid("product","category_id",1," ","all");
                
                   foreach($result as $row) {
                  $product_id = $row['id'];
@@ -66,7 +66,7 @@
          
             <?php
                
-                 $result = $db->getdatabyid("product", "category_id",9);
+                 $result = $db->getdatabyid("product","category_id",9," ","all");
                  
                     foreach($result as $row) {
                  $product_id = $row['id'];

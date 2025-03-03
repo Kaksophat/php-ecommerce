@@ -70,6 +70,12 @@
                   <p>Slideshow</p>
                 </a>
               </li>
+              <li <?= ($p=="listadmin" ?"class='nav-item  active'":"class='nav-item'") ?>>
+                <a href="index.php?p=listadmin">
+                  <i class="fas fa-desktop"></i>
+                  <p>Admin</p>
+                </a>
+              </li>
 
             
             

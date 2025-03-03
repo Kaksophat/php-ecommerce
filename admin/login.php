@@ -1,4 +1,21 @@
+<?php
+ include "./include/oop.php";
+ $auth = new Auth();
 
+  if(isset($_POST['email']) && isset($_POST['password'])){
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $result = $auth->login($email, $password);
+    if($result){
+        header('location:./index.php');
+    }
+    else{
+        header('location:./login.php');
+    }
+  }
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +33,7 @@
             <h3 class="text-center">Login</h3>
           </div>
           <div class="card-body">
-            <form action="./include/login-code.php" method="POST">
+            <form action="" method="POST">
               <div class="form-group">
                 <label for="email">Email address</label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">

@@ -2,9 +2,7 @@
  if (isset($_GET['id'])) {
     $id = ($_GET['id']);
     $result1 = $db->deletedata("product", $id);
-    if($result1){
-        echo "<script>alert('Product Deleted Successfully')</script>";
-    }
+   
  }
 $result = $db->getdata("product");
 
@@ -45,6 +43,7 @@ $result = $db->getdata("product");
 												<th>BrandID</th>
                                                 <th>Name</th>
                                                 <th>Price</th>
+                                                <th>Qty</th>
                                                 <th>Image</th>
                                                 <th>Actions</th>
                                             </tr>
@@ -59,12 +58,13 @@ $result = $db->getdata("product");
                                         echo "<td>" . $row['brand_id'] . "</td>";
                                         echo "<td>" . $row['product_name'] . "</td>";
                                         echo "<td>" . $row['price'] . "</td>";
+                                        echo "<td>" . $row['qty'] . "</td>";
                                         echo "<td style='width:80px'>
                                                 <img src='./upload/" . $row['image'] . "' alt='" . $row['product_name'] . "' width='70px' height='70px'>
                                               </td>";
                                         echo "<td>
                                                 <a href='index.php?p=addproduct&id=" . $row['id'] . "' class='btn btn-success'>Edit</a> 
-                                                <a href='./include/delete.php?id=" . $row['id'] . "' class='btn btn-danger'>Delete</a>
+                                                <a href='index.php?p=listproduct&id=" . $row['id'] . "' class='btn btn-danger'>Delete</a>
                                               </td>";
                                         echo "</tr>";
                                     }

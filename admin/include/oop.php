@@ -4,7 +4,7 @@ class Ecommerce {
     private $dbUsername = "root"; 
     private $dbPassword = ""; 
     private $dbName     = "phpecomerce"; 
-    private $conn;
+    protected $conn;
 
     public function __construct() { 
         try { 
@@ -15,13 +15,12 @@ class Ecommerce {
         } 
     }
 
-    public function getConnection() {
-        return $this->conn;
-    }
+  
 
     public function getdata($table){
 
-        $sql = "select * from $table";
+        $sql = "SELECT * from $table";
+      
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -29,11 +28,14 @@ class Ecommerce {
         
     }
 
-    public function insertdata($table,$data){ 
+    public function insertdata($table ,$data,){ 
         $columnString = implode(',', array_keys($data)); 
         
         $valueString = ":".implode(',:', array_keys($data)); 
         $sql = "INSERT INTO $table ($columnString) value ($valueString)";
+
+       
+       
         $stmt = $this->conn->prepare($sql);
         foreach($data as $key=>$val){ 
             $stmt->bindValue(':'.$key, $val); 
@@ -44,17 +46,24 @@ class Ecommerce {
 
     }
 
-    public function getdatabyid($table ,$field,$id,$clause=""){
-        $sql = "SELECT * FROM $table WHERE $field = $id";
-        if(!empty($clause))
-		{
-			$sql .= " " . $clause; 
-		}
-        $stmt= $this->conn->prepare($sql);
+    public function getdatabyid($table, $field, $value = "", $clause = "", $fetch = "single") {
+        $sql = "SELECT * FROM $table WHERE $field = :value";
+        
+        if (!empty($clause)) {
+            $sql .= " " . $clause;
+        }
+        
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":value", $value);
         $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
+    
+        if ($fetch === "all") {
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
     }
+    
 
     public function updatedata($table, $data, $id) {
         $sql = "UPDATE $table SET ";
@@ -94,4 +103,48 @@ class Ecommerce {
     }
 
 }
+
+class Auth extends Ecommerce {
+   
+    public function login($email, $password) {
+      
+        $result = $this->getdatabyid('user', 'email', $email);
+      
+
+
+        if ($result && password_verify($password, $result['password'])) {
+            session_start();
+            $_SESSION['id'] = $result['id'];
+            $_SESSION['email'] = $email;
+            header('location: ./index.php');
+            exit;
+        } else {
+            header('location: ./login.php');
+        }
+    }
+    public function register($data,$table){
+        $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
+        $result = $this->insertdata($table, $data);
+        return $result;
+    }
+    public function logout(){
+        session_destroy();
+        session_unset();
+    }
+    public function check(){
+        if(isset($_SESSION['id'])){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function user($id){
+        $result = $this->getdatabyid('user', 'id', $id);
+    
+        return $result;
+    }
+
+}
+   
+
 ?>

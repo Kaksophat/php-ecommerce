@@ -1,8 +1,7 @@
-<?php
+<!-- <?php
 include('oop.php');
 
 $db = new Ecommerce();
-$conn = $db->getConnection();
 if(isset($_GET['id']))
 $id = $_GET['id'];
 $sql = "DELETE FROM product where id = ?";
@@ -19,4 +18,4 @@ if($result){
 
  
 
-?>
+?> -->

@@ -1,47 +1,4 @@
-<?php
-session_start();
-include('./admin/include/dbconnection.php');
 
-if (isset($_POST['add_to_cart'])) {
-    $product_id = $_POST['product_id'];
-    $quantity = isset($_POST['quantity']) ? $_POST['quantity'] : 1;
-
-    // Check if the product is already in the cart
-    $cart_query = "SELECT * FROM cart WHERE product_id = ?";
-    $stmt = $conn->prepare($cart_query);
-    $stmt->bind_param("i", $product_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $cart_item = $result->fetch_assoc();
-
-    if ($cart_item) {
-        // Update quantity if product is already in the cart
-        $new_quantity = $cart_item['product_qty'] + $quantity;
-        $update_query = "UPDATE cart SET product_qty = ? WHERE id = ?";
-        $stmt = $conn->prepare($update_query);
-        $stmt->bind_param("ii", $new_quantity, $cart_item['id']);
-        $stmt->execute();
-    } else {
-        // Insert the product into the cart
-        $insert_query = "INSERT INTO cart (product_id, product_qty) VALUES (?, ?)";
-        $stmt = $conn->prepare($insert_query);
-        $stmt->bind_param("ii", $product_id, $quantity);
-        $stmt->execute();
-    }
-}
-
-
-
-
-function countCartItems($conn) {
-    $count_sql = "SELECT SUM(product_qty) AS total_items FROM cart";
-    $count_result = mysqli_query($conn, $count_sql);
-    $count_row = mysqli_fetch_assoc($count_result);
-    return $count_row['total_items'];
-}
-
-$cart_count = countCartItems($conn);
-?>
 
 
 <section id="billboard" class="position-relative overflow-hidden bg-light-blue">
@@ -65,7 +22,7 @@ $cart_count = countCartItems($conn);
             <!-- <div class="d-flex"> -->
                 <!-- <div class="swiper-wrapper"> -->
                     <?php
-                   $result = $db->getdatabyid("product", "category_id",1);
+                   $result = $db->getdatabyid("product", "category_id",1,"","all");
                  
                    foreach($result as $row) {
                         $product_id = $row['id'];

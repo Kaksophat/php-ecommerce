@@ -1,3 +1,4 @@
+
 <div class="main-header">
           <div class="main-header-logo">
             <!-- Logo Header -->
@@ -351,7 +352,7 @@
                             />
                           </div>
                           <div class="u-text">
-                            <h4>Hizrian</h4>
+                            <h4><?php echo $user_name ?></h4>
                             <p class="text-muted"> <?php echo ($user_email)?> </p>
                             <a
                               href="profile.html"
@@ -369,7 +370,7 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Account Setting</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="./include/logout.php">Logout</a>
+                        <a class="dropdown-item" href="p=logout">Logout</a>
                       </li>
                     </div>
                   </ul>

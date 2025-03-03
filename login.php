@@ -1,21 +1,4 @@
-<?php
-// session_start();
-include('./admin/include/dbconnection.php');
-include('./code-login.php');
 
-
-
-
-
-function countCartItems($conn) {
-    $count_sql = "SELECT SUM(product_qty) AS total_items FROM cart";
-    $count_result = mysqli_query($conn, $count_sql);
-    $count_row = mysqli_fetch_assoc($count_result);
-    return $count_row['total_items'];
-}
-
-$cart_count = countCartItems($conn);
-?>
 
 
 

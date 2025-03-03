@@ -53,13 +53,21 @@
                                         <tbody>
                                         <?php
                                if ($result) {
+                                
                                 foreach ($result as $row) {
+                                    if ($row['enable'] == 1) {
+                                        $row['enable'] = "Enable";
+                                        $class = "text-success";
+                                    } else {
+                                        $row['enable'] = "Disable";
+                                        $class = "text-danger";
+                                    }
                                         echo "<tr>";
                                         echo "<td>" . $row['id'] . "</td>";
                                         echo "<td>" . $row['title'] . "</td>";
                                         echo "<td>" . $row['subtitle'] . "</td>";
                                         echo "<td><img src='./upload/" . $row['image'] . "' width='100'></td>";
-                                        echo "<td>" . $row['enable'] . "</td>";
+                                        echo "<td class='$class'>" . $row['enable'] . "</td>";
                                         echo "<td>" . $row['ssorder'] . "</td>";
                                         echo "<td><a href='index.php?p=addslideshow&id=" . $row['id'] . "' class='btn btn-success'>Edit</a> 
                                         <a href='index.php?p=listslideshow&id=" . $row['id'] . "' class='btn btn-danger'

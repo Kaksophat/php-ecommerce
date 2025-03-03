@@ -34,10 +34,9 @@ if (isset($_GET['id'])) {
     $result = $db->getdatabyid("category", "id",$id);
     
     if ($result) {
-        foreach ($result as $row) {
-            $name = $row["name"];
-            $slug = $row["slug"];
-        }
+            $name = $result["name"];
+            $slug = $result["slug"];
+        
     }
     
     $buttonLabel = "Update Category";

@@ -1,4 +1,12 @@
 <?php
+if (isset($_GET['id'])) {
+    $id = ($_GET['id']);
+    
+   
+    $result1 = $db->deletedata("brands", $id);
+
+ 
+}
     $result = $db->getdata("brands");
 
 
@@ -51,7 +59,7 @@
                                         echo "<td>" . $row['slug'] . "</td>";
                                         echo "<td>" . $row['date'] . "</td>";
                                         echo "<td><a href='index.php?p=addbrand&id=" . $row['id'] . "' class='btn btn-success'>Edit</a> 
-                                        <a href='index.php?p=listcategory&id=" . $row['id'] . "' class='btn btn-danger'
+                                        <a href='index.php?p=listbrand&id=" . $row['id'] . "' class='btn btn-danger'
                                          onclick=' confirm('Are you sure you want to delete this category?');'>Delete</a></td>";
                                         echo "</tr>";
                                     }

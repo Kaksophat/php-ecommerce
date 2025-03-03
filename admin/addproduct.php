@@ -9,21 +9,38 @@ if (isset($_POST['submit'])) {
   $productName =  $_POST['productName'];
   $categoryId =  $_POST['categoryid'];
   $productPrice = $_POST['productPrice'];
+  $productQty = $_POST['productQty'];
+  $brand_id = $_POST['brand_id'];
   $productImage = $_FILES['productImage']['name'];
   $target_dir = "./upload/";
-  $target_file = $target_dir . basename($productImage);
+  $id = $_POST['id'] ?? "";
 
-  move_uploaded_file($_FILES['productImage']['tmp_name'], $target_file);
-  $data=[
-    "category_id" => $categoryId,
-    "product_name" => $productName,
-    "image" => $productImage,
-    "price" => $productPrice
-
-  ];
+  if (!empty($productImage)) {
+    $target_file = $target_dir . basename($productImage);
+    move_uploaded_file($_FILES['productImage']['tmp_name'], $target_file);
+} else {
+    $existingData = $db->getdatabyid("product", "id", $id,"");
+    $productImage = $existingData['image'] ?? "";
+}
+  
+    $data=[
+        "category_id" => $categoryId,
+        "brand_id" => $brand_id,
+        "product_name" => $productName,
+        "image" => $productImage,
+        "price" => $productPrice,
+        "qty" => $productQty
+    
+      ];
+    if ($_POST['action'] == "update" && $id !== "") {
+        $result = $db->updatedata("product", $data, $id);
+     
+    } else {
+        $result = $db->insertdata("product", $data);
+    }
+  
  
  
-  $result = $db->insertdata("product" , $data);
      
 }
 
@@ -34,13 +51,13 @@ if (isset($_GET['id'])) {
     $result = $db->getdatabyid("product", "id",$id);
     
     if ($result) {
-        foreach ($result as $row) {
-            $categoryid = $row["category_id"];
-            $brand_id = $row["brand_id"];
-            $product_name = $row["product_name"];
-            $image = $row["image"];
-            $price = $row["price"];
-        }
+            $categoryid = $result["category_id"];
+            $brand_id = $result["brand_id"];
+            $product_name = $result["product_name"];
+            $image = $result["image"];
+            $price = $result["price"];
+            $qty = $result["qty"];
+        
     }
     
     $buttonLabel = "Update Product";
@@ -79,6 +96,7 @@ if (isset($_GET['id'])) {
                     </div>
                     <div class="card-body">
                         <form action="" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="id" value="<?php echo isset($id) ? $id : ""; ?>">
                             <div class="form-group">
                                 <label for="productName">Product Name</label>
                                 <input type="text" class="form-control" id="productName" value="<?php echo isset($product_name) ? $product_name : "" ?>" name="productName" >
@@ -88,16 +106,21 @@ if (isset($_GET['id'])) {
                                 <input type="number" class="form-control" id="productPrice" value="<?php echo isset($price) ? $price : "" ?>" name="productPrice" >
                             </div>
                             <div class="form-group">
+                                <label for="productPrice">Product Qty</label>
+                                <input type="number" class="form-control" id="productPrice" value="<?php echo isset($qty) ? $qty : "" ?>" name="productQty" >
+                            </div>
+                            <div class="form-group">
                                         <label for="categoryId">Category</label>
                                         <select class="form-control" id="categoryid" name="categoryid"  >
-                                            <!-- <option value=""><?php $categoryresult["name"]?></option> -->
-                                            <?php
-                                            if ( $categoryresult) {
-                                                foreach($categoryresult as $category) {
-                                                  echo "<option value='" .  $category['id'] . "'>" . $category['name'] . " </option>";
-                                                }
-                                            }
-                                            ?>
+                                        <option value="">Select Category</option>
+                                      <?php
+                                                 if ($categoryresult) {
+                                                     foreach ($categoryresult as $category) {
+                                                     $selected = (isset($categoryid) && $categoryid == $category['id']) ? "selected" : "";
+                                                      echo "<option value='" . $category['id'] . "' $selected>" . $category['name'] . "</option>";
+                                                           }
+                                                        }
+                                                         ?>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -119,7 +142,10 @@ if (isset($_GET['id'])) {
                                 <!-- <?php echo " <img src='./upload/$image' class='w-25'>"  ?> -->
                             </div>
                             <!-- <input type="submit" class="btn btn-primary">Add Product</input> -->
-                             <input type="submit" value="AddProduct" name="submit" class="btn btn-primary">
+                            <input type="hidden" name="action" value="<?php echo $action; ?>">
+                            <input type="submit" value="<?php echo $buttonLabel; ?>" name="submit" class="btn btn-primary">
+                            </div>
+                           
                         </form>
                     </div>
                 </div>

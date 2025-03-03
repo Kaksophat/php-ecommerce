@@ -2,8 +2,8 @@
 <div class='swiper main-swiper'>
 <div class='swiper-wrapper'>
         <?php
-            $result = $db->getdatabyid("slider", "enable",1," ORDER BY ssorder asc");
-            foreach ($result as $row) {
+            $result = $db->getdatabyid("slider", "enable",1," ORDER BY ssorder asc","all");
+                foreach($result as $row){
                 $title = $row["title"];
                 $subtitle = $row["subtitle"];
                 $link = $row["link"];
@@ -15,8 +15,8 @@
                   <div class='row d-flex flex-wrap align-items-center'>
                     <div class='col-md-6'>
                       <div class='banner-content'>
-                        <h1 class='display-2 text-uppercase text-dark pb-5'>$title</h1>
-                        <h3 class='display-2 text-uppercase text-dark pb-5'>$subtitle</h3>
+                        <h1 class='display-2 text-uppercase text-dark pb-2'>$title</h1>
+                        <h3 class='display-2 text-uppercase text-dark pb-2'>$subtitle</h3>
                         <a href='$link' class='btn btn-medium btn-dark text-uppercase btn-rounded-none'>Shop Product</a>
                       </div>
                     </div>
@@ -28,9 +28,10 @@
                   </div>
                 </div>
               </div>";
+                }
               
                
-            }
+            
        
         ?>
          
