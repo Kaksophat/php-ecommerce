@@ -3,7 +3,7 @@ class Ecommerce {
     private $dbHost     = "localhost"; 
     private $dbUsername = "root"; 
     private $dbPassword = ""; 
-    private $dbName     = "phpecomerce"; 
+    private $dbName     = "phpecommerce"; 
     protected $conn;
 
     public function __construct() { 

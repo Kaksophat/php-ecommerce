@@ -22,12 +22,13 @@
             <?php
             // Fetch all products under category 1
             $result = $db->getdatabyid("product", "category_id", 1, "", "all");
-            
+
             foreach ($result as $row) {
                 $product_id = $row['id'];
                 $product_name = htmlspecialchars($row['product_name']);
                 $product_image = htmlspecialchars($row['image']);
                 $product_price = number_format($row['price'], 2);
+                $product_quantity = $row['qty'];
 
                 echo "<div class='col-md-3 col-sm-6 col-12 mb-5 mt-5'>
                     <div class='product-card position-relative'>
@@ -38,7 +39,7 @@
                             <div class='cart-button d-flex'>
                                 <form method='POST' action=''>
                                     <input type='hidden' name='product_id' value='$product_id'>
-                                    <input type='hidden' name='quantity' value='1'>
+                                    <input type='hidden' name='quantity' value='1' max='$product_quantity'>
                                     <button type='submit' class='btn btn-medium btn-black' name='add_to_cart'>Add to Cart
                                         <svg class='cart-outline'><use xlink:href='#cart-outline'></use></svg>
                                     </button>

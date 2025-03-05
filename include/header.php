@@ -83,20 +83,15 @@ if (!isset($_SESSION['cus_email']) && !isset($_SESSION['cus_pass'])) { ?>
                     </ul>
                 </li>
                 <li class="pt-2">
-    <a href="cart.php" class="position-relative">
+    <a href="index.php?p=cart" class="position-relative">
         <svg class="cart">
             <use xlink:href="#cart"></use>
         </svg>
-        <?php
-        $num_items_in_cart = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
-        ?>
-        
-            <span class="cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                <?= $num_items_in_cart ?>
-            </span>
+        <span class="cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            <?= $num_items_in_cart ?>
+        </span>
     </a>
 </li>
-
             </ul>
         </div>
     </li>
