@@ -1,17 +1,4 @@
-<?php
-session_start();
-$cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
-$total_price = 0;
-if(isset($_POST['remove'])){
-$product_id = $_POST['product_id'];
 
-    $_SESSION['cart'][$product_id] -= 1;
-    if ($_SESSION['cart'][$product_id] <= 0) {
-        unset($_SESSION['cart'][$product_id]);
-    }
-}
-
-?>
 
 <section id="billboard" class="position-relative overflow-hidden bg-light-blue">
     <div class="swiper main-swiper">
