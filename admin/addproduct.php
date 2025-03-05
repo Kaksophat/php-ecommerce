@@ -1,6 +1,6 @@
 <?php
  $categoryresult = $db->getdata("category");
- $brandresult = $db->getdata("brands");
+ $brandresult = $db->getdata("brand");
  $buttonLabel = "Add Product";
  $action = "add";
 
@@ -10,7 +10,7 @@ if (isset($_POST['submit'])) {
   $categoryId =  $_POST['categoryid'];
   $productPrice = $_POST['productPrice'];
   $productQty = $_POST['productQty'];
-  $brand_id = $_POST['brand_id'];
+  $brand_id = $_POST['brandid'];
   $productImage = $_FILES['productImage']['name'];
   $target_dir = "./upload/";
   $id = $_POST['id'] ?? "";
@@ -125,7 +125,7 @@ if (isset($_GET['id'])) {
                                     </div>
                                     <div class="form-group">
                                         <label for="categoryId">Brand</label>
-                                        <select class="form-control" id="categoryid" name="categoryid"  >
+                                        <select class="form-control" id="categoryid" name="brandid"  >
                                         <!-- <option value="">Select Brand</option> -->
                                             <?php
                                             if ( $brandresult) {
