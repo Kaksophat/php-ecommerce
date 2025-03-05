@@ -1,4 +1,12 @@
 <?php
+if (isset($_GET['id'])) {
+    $id = ($_GET['id']);
+    
+   
+    $result1 = $db->deletedata("user", $id);
+
+ 
+}
 
 $result = $db->getdata("user");
 

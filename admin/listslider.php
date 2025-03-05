@@ -4,11 +4,11 @@
       $id = ($_GET['id']);
       
      
-      $result1 = $db->deletedata("slider", $id);
+      $result1 = $db->deletedata("slide", $id);
 
    
   }
-  $result = $db->getdata("slider");
+  $result = $db->getdata("slide");
 
 ?>
 

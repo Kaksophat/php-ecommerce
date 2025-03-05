@@ -25,7 +25,7 @@
 
             foreach ($result as $row) {
                 $product_id = $row['id'];
-                $product_name = htmlspecialchars($row['product_name']);
+                $product_name = htmlspecialchars($row['title']);
                 $product_image = htmlspecialchars($row['image']);
                 $product_price = number_format($row['price'], 2);
                 $product_quantity = $row['qty'];

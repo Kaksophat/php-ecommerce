@@ -3,11 +3,11 @@ if (isset($_GET['id'])) {
     $id = ($_GET['id']);
     
    
-    $result1 = $db->deletedata("brands", $id);
+    $result1 = $db->deletedata("brand", $id);
 
  
 }
-    $result = $db->getdata("brands");
+    $result = $db->getdata("brand");
 
 
 

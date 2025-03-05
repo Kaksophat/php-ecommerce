@@ -39,10 +39,10 @@ if (isset($_POST['submit'])) {
     
 
     if ($_POST['action'] == "update" && $id !== "") {
-        $result = $db->updatedata("slider", $data, $id);
+        $result = $db->updatedata("slide", $data, $id);
      
     } else {
-        $result = $db->insertdata("slider", $data);
+        $result = $db->insertdata("slide", $data);
     }
   
 } 
@@ -50,7 +50,7 @@ if (isset($_POST['submit'])) {
  
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $result = $db->getdatabyid("slider", "id",$id);
+    $result = $db->getdatabyid("slide", "id",$id);
     
     if ($result) {
             $title = $result["title"];

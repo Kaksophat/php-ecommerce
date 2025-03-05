@@ -17,9 +17,9 @@ if (isset($_POST['submit'])) {
         ];
 
         if ($_POST['action'] == "update" && $id !== "") {
-            $result = $db->updatedata("brands", $data, $id);
+            $result = $db->updatedata("brand", $data, $id);
         } else {
-            $result = $db->insertdata("brands", $data);
+            $result = $db->insertdata("brand", $data);
         }
     } else {
         echo "<p style='color: red;'>Category Name and Slug are required!</p>";
@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
 }
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $result = $db->getdatabyid("brands", "id",$id);
+    $result = $db->getdatabyid("brand", "id",$id);
     
     if ($result) {
             $name = $result["name"];

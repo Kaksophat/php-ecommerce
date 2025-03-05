@@ -2,7 +2,7 @@
 <div class='swiper main-swiper'>
 <div class='swiper-wrapper'>
         <?php
-            $result = $db->getdatabyid("slider", "enable",1," ORDER BY ssorder asc","all");
+            $result = $db->getdatabyid("slide", "enable",1," ORDER BY ssorder asc","all");
                 foreach($result as $row){
                 $title = $row["title"];
                 $subtitle = $row["subtitle"];

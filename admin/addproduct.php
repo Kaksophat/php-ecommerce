@@ -26,7 +26,7 @@ if (isset($_POST['submit'])) {
     $data=[
         "category_id" => $categoryId,
         "brand_id" => $brand_id,
-        "product_name" => $productName,
+        "title" => $productName,
         "image" => $productImage,
         "price" => $productPrice,
         "qty" => $productQty
@@ -53,7 +53,7 @@ if (isset($_GET['id'])) {
     if ($result) {
             $categoryid = $result["category_id"];
             $brand_id = $result["brand_id"];
-            $product_name = $result["product_name"];
+            $product_name = $result["title"];
             $image = $result["image"];
             $price = $result["price"];
             $qty = $result["qty"];

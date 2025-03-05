@@ -56,11 +56,11 @@ $result = $db->getdata("product");
                                         echo "<td>" . $row['id'] . "</td>";
                                         echo "<td>" . $row['category_id'] . "</td>";
                                         echo "<td>" . $row['brand_id'] . "</td>";
-                                        echo "<td>" . $row['product_name'] . "</td>";
+                                        echo "<td>" . $row['title'] . "</td>";
                                         echo "<td>" . $row['price'] . "</td>";
                                         echo "<td>" . $row['qty'] . "</td>";
                                         echo "<td style='width:80px'>
-                                                <img src='./upload/" . $row['image'] . "' alt='" . $row['product_name'] . "' width='70px' height='70px'>
+                                                <img src='./upload/" . $row['image'] . "' alt='" . $row['title'] . "' width='70px' height='70px'>
                                               </td>";
                                         echo "<td>
                                                 <a href='index.php?p=addproduct&id=" . $row['id'] . "' class='btn btn-success'>Edit</a> 

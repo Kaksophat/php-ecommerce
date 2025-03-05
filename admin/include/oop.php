@@ -112,15 +112,15 @@ class Auth extends Ecommerce {
       
 
 
-        if ($result && password_verify($password, $result['password'])) {
+        // if ($result && password_verify($password, $result['password'])) {
             session_start();
             $_SESSION['id'] = $result['id'];
             $_SESSION['email'] = $email;
             header('location: ./index.php');
             exit;
-        } else {
-            header('location: ./login.php');
-        }
+        // } else {
+        //     header('location: ./login.php');
+        // }
     }
     public function register($data,$table){
         $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
