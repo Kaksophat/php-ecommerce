@@ -26,6 +26,12 @@ if(isset($_GET['p']))
          case "login" : $page = "login.php";
                   $slider = false;
           break;
+          case "about" : $page = "about.php";
+                  $slider = false;
+          break;
+          case "contact" : $page = "contact.php";
+          $slider = false;
+  break;
           case "cart" : $page = "cart.php";
           $slider = false;
   break;

@@ -53,12 +53,13 @@
                                 </li>
                             </ul>
                         </li>
-                        <li>
-                            <a href="index.php?p=about" <?=($p=="about" ? "class='dropdown-item active'" : "class='dropdown-item'" ) ?>>About</a>
+                        <li class="nav-item">
+                            <a href="index.php?p=about" <?=($p=="about" ? "class='nav-link me-4 active'" : "class='nav-link me-4 '" ) ?>>About</a>
                         </li>
-                        <li>
-                            <a href="index.php?p=contact" <?=($p=="contact" ? "class='dropdown-item active'" : "class='dropdown-item '" ) ?>>Contact</a>
+                        <li class="nav-item">
+                            <a href="index.php?p=contact" <?=($p=="contact" ? "class='nav-link me-4 active'" : "class='nav-link me-4 '" ) ?>>Contact</a>
                         </li>
+                        
                         <?php 
 if (!isset($_SESSION['cus_email']) && !isset($_SESSION['cus_pass'])) { ?>
     <li class="nav-item">
