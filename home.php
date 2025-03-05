@@ -11,8 +11,10 @@
             <div class="swiper-wrapper">
              
               <?php
+              $category = $db->getdatabyid("category","name","phones","");
+              $categoryid = $category["id"];
              
-               $result = $db->getdatabyid("product","category_id",6," ","all");
+               $result = $db->getdatabyid("product","category_id",$categoryid," ","all");
                
                   foreach($result as $row) {
                  $product_id = $row['id'];
@@ -65,8 +67,10 @@
             <div class="swiper-wrapper">
          
             <?php
-               
-                 $result = $db->getdatabyid("product","category_id",2," ","all");
+                   $category = $db->getdatabyid("category","name","watch","");
+                   $categoryid = $category["id"];
+                  
+                 $result = $db->getdatabyid("product","category_id",$categoryid," ","all");
                  
                     foreach($result as $row) {
                  $product_id = $row['id'];
