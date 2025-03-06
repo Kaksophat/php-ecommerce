@@ -1,5 +1,4 @@
 
-
 <section id="billboard" class="position-relative overflow-hidden bg-light-blue">
     <div class="swiper main-swiper">
         <div class="swiper-wrapper">
@@ -21,7 +20,6 @@
         <div class="col-md-12">
             <h2 class="text-center">Your Cart Items</h2>
 
-            <?php if (!empty($cart)): ?>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -34,13 +32,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php 
-                        foreach ($cart as $product_id => $quantity): 
+                    
+                    <?php 
+                        $cart = $db->getdata("cart");
+                        foreach ($cart as $cart){
+                            $quantity = $cart['product_qty'];
+                            $product_id = $cart['product_id'];
+                            if (isset($_POST['remove'])) {
+                                $product_id = $_POST['product_id'];
+                                $db->delete("cart", "product_id", $product_id);
+                                header("Location: cart.php");
+                            }
+                        }
+                        $total_price = 0;
+                      
+                        foreach ($cart as $row)
                             // Fetch product details from the database
                             $product = $db->getdatabyid("product", "id", $product_id, "", "single");
 
                             if ($product):
-                                $product_name = htmlspecialchars($product['product_name']);
+                                $product_name = htmlspecialchars($product['title']);
                                 $product_image = htmlspecialchars($product['image']);
                                 $product_price = $product['price'];
                                 $product_total = $product_price * $quantity;
@@ -63,7 +74,6 @@
                         </tr>
                         <?php 
                             endif; 
-                        endforeach;
                         ?>
                     </tbody>
                 </table>
@@ -74,9 +84,7 @@
                     <a href="checkout.php" class="btn btn-success">Proceed to Checkout</a>
                 </div>
 
-            <?php else: ?>
-                <p class="text-center">Your cart is empty.</p>
-            <?php endif; ?>
+        
 
         </div>
     </div>

@@ -1,4 +1,21 @@
+<?php
+if (isset($_POST['product_id'], $_POST['quantity'])) {
+    $product_id = $_POST['product_id'];
+    $quantity = $_POST['quantity'];
 
+    if ($product_id ) {
+        $data=[
+            "product_id" => $product_id,
+            "product_qty" => $quantity
+        ];
+       
+             $cart = $db->insertdata("cart",$data);
+
+        } 
+    }
+  
+
+?>
 
 <section id="billboard" class="position-relative overflow-hidden bg-light-blue">
     <div class="swiper main-swiper">
@@ -39,7 +56,7 @@
                             <div class='cart-button d-flex'>
                                 <form method='POST' action=''>
                                     <input type='hidden' name='product_id' value='$product_id'>
-                                    <input type='hidden' name='quantity' value='1' max='$product_quantity'>
+                                    <input type='hidden' name='quantity' value='1'>
                                     <button type='submit' class='btn btn-medium btn-black' name='add_to_cart'>Add to Cart
                                         <svg class='cart-outline'><use xlink:href='#cart-outline'></use></svg>
                                     </button>
