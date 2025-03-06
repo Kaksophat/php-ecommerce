@@ -1,3 +1,23 @@
+<?php 
+    // Fetch all cart items along with their product details
+    $sql = "SELECT product.id, product.title, product.image, product.price, cart.product_qty 
+            FROM cart 
+            INNER JOIN product ON cart.product_id = product.id";
+    
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $total_price = 0;
+
+    // Handle item removal
+    if (isset($_POST['remove'])) {
+        $product_id = $_POST['product_id'];
+        $db->delete("cart", "product_id", $product_id);
+        header("Location: cart.php");
+        exit(); // Ensure no further execution after redirect
+    }
+?>
 
 <section id="billboard" class="position-relative overflow-hidden bg-light-blue">
     <div class="swiper main-swiper">
@@ -33,48 +53,24 @@
                     </thead>
                     <tbody>
                     
-                    <?php 
-                        $cart = $db->getdata("cart");
-                        foreach ($cart as $cart){
-                            $quantity = $cart['product_qty'];
-                            $product_id = $cart['product_id'];
-                            if (isset($_POST['remove'])) {
-                                $product_id = $_POST['product_id'];
-                                $db->delete("cart", "product_id", $product_id);
-                                header("Location: cart.php");
-                            }
-                        }
-                        $total_price = 0;
-                      
-                        foreach ($cart as $row)
-                            // Fetch product details from the database
-                            $product = $db->getdatabyid("product", "id", $product_id, "", "single");
-
-                            if ($product):
-                                $product_name = htmlspecialchars($product['title']);
-                                $product_image = htmlspecialchars($product['image']);
-                                $product_price = $product['price'];
-                                $product_total = $product_price * $quantity;
-                                $total_price += $product_total;
-                        ?>
-                        <tr>
-                            <td>
-                                <img src="./admin/upload/<?= $product_image ?>" alt="<?= $product_name ?>" width="50">
-                            </td>
-                            <td><?= $product_name ?></td>
-                            <td><?= $quantity ?></td>
-                            <td>$<?= number_format($product_price, 2) ?></td>
-                            <td>$<?= number_format($product_total, 2) ?></td>
-                            <td>
-                                <form method="POST" action="">
-                                    <input type="hidden" name="product_id" value="<?= $product_id ?>">
-                                    <button type="submit" name="remove" class="btn btn-danger btn-sm">Remove</button>
-                                </form>
-                            </td>
-                        </tr>
-                        <?php 
-                            endif; 
-                        ?>
+                    <?php foreach ($cart_items as $item): 
+            $product_total = $item['price'] * $item['product_qty'];
+            $total_price += $product_total;
+        ?>
+        <tr>
+            <td><img src="./admin/upload/<?= htmlspecialchars($item['image']) ?>" alt="<?= htmlspecialchars($item['title']) ?>" width="50"></td>
+            <td><?= htmlspecialchars($item['title']) ?></td>
+            <td><?= $item['product_qty'] ?></td>
+            <td>$<?= number_format($item['price'], 2) ?></td>
+            <td>$<?= number_format($product_total, 2) ?></td>
+            <td>
+                <form method="POST" action="">
+                    <input type="hidden" name="product_id" value="<?= $item['id'] ?>">
+                    <button type="submit" name="remove" class="btn btn-danger btn-sm">Remove</button>
+                </form>
+            </td>
+        </tr>
+        <?php endforeach; ?>
                     </tbody>
                 </table>
 
