@@ -89,15 +89,9 @@ if (!isset($_SESSION['cus_email']) && !isset($_SESSION['cus_pass'])) { ?>
             <use xlink:href="#cart"></use>
         </svg>
         <span class="cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-        <!-- <?php 
-    // Get total cart count (sum of all product quantities)
-    $cart_count_sql = "SELECT SUM(product_qty) AS total_items FROM cart";
-    $stmt = $db->prepare($cart_count_sql);
-    $stmt->execute();
-    $cart_count = $stmt->fetch(PDO::FETCH_ASSOC)['total_items'] ?? 0;
-?>
 
-            <?= $cart_count ?> -->
+    
+            0
         </span>
     </a>
 </li>

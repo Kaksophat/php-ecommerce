@@ -1,7 +1,6 @@
 <?php
  include("./admin/include/oop.php");
  $db = new Ecommerce();
- $db = $db->getconn();
 
 include('./code-login.php');
 
@@ -118,7 +117,6 @@ if(isset($_GET['p']))
       </symbol>
     </svg>  
    <?php include("./include/header.php") ?>
-  
    <?php if($slider) include("./include/slider.php") ?>
   
    <?php  include($page) ?>
