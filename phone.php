@@ -37,8 +37,11 @@ if (isset($_POST['product_id'], $_POST['quantity'])) {
     <div class="container">
         <div class="row">
             <?php
+              $category = $db->getdatabyid("category","name","phones","");
+              $categoryid = $category["id"];
+            
             // Fetch all products under category 1
-            $result = $db->getdatabyid("product", "category_id", 1, "", "all");
+            $result = $db->getdatabyid("product", "category_id", $categoryid , "", "all");
 
             foreach ($result as $row) {
                 $product_id = $row['id'];

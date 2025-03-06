@@ -1,12 +1,21 @@
 <?php
-// session_start();
-// include('./admin/include/dbconnection.php');
+if (isset($_POST['product_id'], $_POST['quantity'])) {
+    $product_id = $_POST['product_id'];
+    $quantity = $_POST['quantity'];
 
+    if ($product_id ) {
+        $data=[
+            "product_id" => $product_id,
+            "product_qty" => $quantity
+        ];
+       
+             $cart = $db->insertdata("cart",$data);
 
-// Check if the user is logged in
+        } 
+    }
+  
+
 ?>
-
-
 
     <section id="billboard" class="position-relative overflow-hidden bg-light-blue">
       <div class="swiper main-swiper">
@@ -34,6 +43,8 @@
             <!-- <div class="swiper-wrapper"> -->
              
             <?php
+             $category = $db->getdatabyid("category","name","watchs","");
+             $categoryid = $category["id"];
                      $result = $db->getdatabyid("product", "category_id",2,"","all");
                  
                      foreach($result as $row) {
