@@ -1,6 +1,7 @@
 <?php
  include("./admin/include/oop.php");
  $db = new Ecommerce();
+ $db = $db->getconn();
 
 include('./code-login.php');
 

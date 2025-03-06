@@ -15,7 +15,10 @@ class Ecommerce {
         } 
     }
 
-  
+   public function getconn(){
+         return $this->conn;
+    
+   }
 
     public function getdata($table){
 

@@ -67,7 +67,7 @@
             <div class="swiper-wrapper">
          
             <?php
-                   $category = $db->getdatabyid("category","name","watch","");
+                   $category = $db->getdatabyid("category","name","watchs","");
                    $categoryid = $category["id"];
                   
                  $result = $db->getdatabyid("product","category_id",$categoryid," ","all");
