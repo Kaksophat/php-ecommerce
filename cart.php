@@ -1,10 +1,11 @@
 <?php 
+$conn = $db->getconn();
     // Fetch all cart items along with their product details
     $sql = "SELECT product.id, product.title, product.image, product.price, cart.product_qty 
             FROM cart 
             INNER JOIN product ON cart.product_id = product.id";
     
-    $stmt = $db->prepare($sql);
+    $stmt = $conn->prepare($sql);
     $stmt->execute();
     $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

@@ -89,7 +89,13 @@ if (!isset($_SESSION['cus_email']) && !isset($_SESSION['cus_pass'])) { ?>
             <use xlink:href="#cart"></use>
         </svg>
         <span class="cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+<<<<<<< HEAD
       0
+=======
+
+    
+            0
+>>>>>>> 01e13a3cb10dd74efbe9afb9ab0b7f8f6e34bcc4
         </span>
     </a>
 </li>

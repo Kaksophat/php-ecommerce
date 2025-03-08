@@ -8,6 +8,12 @@ $page = "home.php";
 $p = "home";
 $slider = true;
 // $num_items_in_cart = array_sum($_SESSION['cart']) +1;
+<<<<<<< HEAD
+=======
+// $num_items_in_cart =0;
+
+
+>>>>>>> 01e13a3cb10dd74efbe9afb9ab0b7f8f6e34bcc4
 if(isset($_GET['p']))
        $p = $_GET['p'];
       switch($p){
@@ -114,7 +120,6 @@ if(isset($_GET['p']))
       </symbol>
     </svg>  
    <?php include("./include/header.php") ?>
-  
    <?php if($slider) include("./include/slider.php") ?>
   
    <?php  include($page) ?>
