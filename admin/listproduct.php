@@ -60,7 +60,7 @@ $result = $db->getdata("product");
                                             </td>
                                             <td>
                                                 <a href='index.php?p=addproduct&id=<?= $row['id'] ?>' class='btn btn-success'>Edit</a>
-                                                <button class='btn btn-danger' onclick="confirmDelete(<?= $row['id'] ?>)">Delete</button>
+                                                <button class='btn btn-danger' class="btn btn-danger" onclick="confirmDelete('<?php echo $row['id']; ?>', '<?php echo $row['title']; ?>')">Delete</button>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -77,39 +77,41 @@ $result = $db->getdata("product");
         </div>
     </div>
 </div>
-
-<!-- Delete Confirmation Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" style="margin-top: 250px;">
+<!-- Delete Confirmation Modal Component -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" style="margin-top: 200px;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
-                <button type="button" class="close" onclick="redirectToDashboard()" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal-btn" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                Are you sure you want to delete this product?
+                <p id="modalMessage">Are you sure you want to delete this item?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="redirectToDashboard()">Cancel</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close" >Cancel</button>
                 <a id="confirmDeleteBtn" href="#" class="btn btn-danger">Delete</a>
             </div>
         </div>
     </div>
 </div>
-
-<!-- JavaScript for Modal Confirmation -->
 <script>
-    function confirmDelete(productId) {
-        let deleteUrl = "index.php?p=listproduct&id=" + productId;
+    function confirmDelete(productId, productName = "this item", returnUrl = "index.php?p=listproduct") {
+        let deleteUrl = returnUrl + "&id=" + productId;
         document.getElementById("confirmDeleteBtn").href = deleteUrl;
-        $('#deleteModal').modal('show');
+        document.getElementById("modalMessage").innerText = "Are you sure you want to delete " + productName + "?";
+        $('#deleteModal').modal('show'); 
     }
-
-    function redirectToDashboard() {
-        window.location.href = "index.php?p=listproduct"; // Redirect to the dashboard
-    }
+    document.querySelector('[data-dismiss="modal"]').addEventListener('click', function() {
+        $('#deleteModal').modal('hide'); 
+    });
+    document.querySelector('[data-dismiss="modal-btn"]').addEventListener('click', function() {
+        $('#deleteModal').modal('hide'); 
+    });
 </script>
+
+
 
 
