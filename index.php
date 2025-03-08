@@ -1,7 +1,6 @@
 <?php
  include("./admin/include/oop.php");
  $db = new Ecommerce();
- $db = $db->getconn();
 
 include('./code-login.php');
 
@@ -9,9 +8,6 @@ $page = "home.php";
 $p = "home";
 $slider = true;
 // $num_items_in_cart = array_sum($_SESSION['cart']) +1;
-$num_items_in_cart =0;
-
-
 if(isset($_GET['p']))
        $p = $_GET['p'];
       switch($p){

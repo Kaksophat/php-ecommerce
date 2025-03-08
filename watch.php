@@ -45,7 +45,7 @@ if (isset($_POST['product_id'], $_POST['quantity'])) {
             <?php
              $category = $db->getdatabyid("category","name","watchs","");
              $categoryid = $category["id"];
-                     $result = $db->getdatabyid("product", "category_id",2,"","all");
+                     $result = $db->getdatabyid("product", "category_id",  $categoryid,"","all");
                  
                      foreach($result as $row) {
                         $product_id = $row['id'];
